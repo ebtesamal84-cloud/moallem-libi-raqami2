@@ -1,0 +1,28 @@
+{
+  "name": "المعلم الليبي الرقمي",
+  "short_name": "م.ل.ر",
+  "description": "المنصة الذكية المتكاملة للمعلم الليبي المحترف — تخطيط وإنتاج وتقويم وتطوير مهني",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F2F6FB",
+  "theme_color": "#0B2545",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
