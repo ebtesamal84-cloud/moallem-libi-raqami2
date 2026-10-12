@@ -103,6 +103,17 @@ button{font-family:inherit}
   .scrim.on{display:block}
   .nav-toggle{display:grid}
   .brand-txt small{display:none}
+  /* الترويسة تصير سطرين: شريط علوي + شريط بحث بعرض كامل */
+  .hdr-in{flex-wrap:wrap;row-gap:8px}
+  .brand{flex:1 1 auto;min-width:0}
+  .brand-txt b{overflow:hidden;text-overflow:ellipsis}
+  .hdr-actions{margin-inline-start:auto}
+  .searchwrap{order:9;flex:1 1 100%;max-width:none;margin-inline-start:0}
+}
+@media (max-width:420px){
+  .brand-txt b{font-size:15px}
+  .mark{width:36px;height:36px;flex:0 0 36px;font-size:19px}
+  .icon-btn{min-width:36px;height:36px}
 }
 
 /* ---------- مكونات ---------- */
