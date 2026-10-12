@@ -284,11 +284,34 @@ html[data-theme="dark"] .notice.ok{background:#0F2E1E;color:#A7E7C4}
 html[data-theme="dark"] .modal-h h3{color:#9FE0F0}
 .modal-x{background:none;border:0;font-size:24px;cursor:pointer;color:var(--muted);line-height:1}
 
+/* ---------- معاينة الملفات (PDF / صور) ---------- */
+.modal.wide{max-width:960px}
+.viewer-frame{width:100%;height:66vh;min-height:420px;border:1px solid var(--border);border-radius:10px;
+  background:#525659}
+.viewer-img{display:block;max-width:100%;max-height:66vh;margin:0 auto;border:1px solid var(--border);
+  border-radius:10px;background:var(--surface2)}
+.xtr-prev{white-space:pre-wrap;background:var(--surface2);border:1px dashed var(--border);border-radius:10px;
+  padding:12px;font-size:13.5px;line-height:1.8;max-height:260px;overflow:auto}
+
 /* ---------- التذييل ---------- */
 .ftr{background:var(--navy);color:#C9D8EC;padding:22px 16px;font-size:13.5px;text-align:center}
 .ftr b{color:var(--gold-l)}
 .ftr .f-links{margin-top:8px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .ftr a{color:#9FD8D4}
+
+/* ---------- صفوف القوائم ---------- */
+.cr-row{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;
+  padding:10px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap}
+.cr-row:last-child{border-bottom:0}
+.cr-main{flex:1;min-width:210px}
+.cr-main b{font-size:15px;display:inline-block}
+.cr-main .badge{margin-inline-end:4px}
+.q-row label{margin-bottom:4px}
+input[type="file"]{font-size:14px}
+input[type="file"]::file-selector-button{font-family:inherit;font-size:13.5px;padding:6px 12px;
+  border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);cursor:pointer;margin-inline-end:10px}
+.btn-row input[type="search"]{flex:1;min-width:180px}
+.check{display:flex;gap:8px;align-items:center;font-size:14px}
 
 /* ---------- الطباعة ---------- */
 #print-area{display:none}

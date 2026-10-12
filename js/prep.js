@@ -12,6 +12,7 @@
   var U = App.ui;
   var $ = U.$, $$ = U.$$, esc = U.esc, notify = U.notify,
       fmtAr = U.fmtAr, todayISO = U.todayISO;
+  var UI = global.UI;   /* نوافذ التأكيد المخصصة (ui.js تُحمَّل قبل هذا الملف) */
 
   var TYPES = { daily: 'تحضير يومي', weekly: 'تحضير أسبوعي', term: 'تحضير فصلي' };
   var TABS = [
@@ -182,13 +183,15 @@
   function saveTemplate() {
     var d = collect();
     if (!d.lesson) { notify('اكتبي عنوان الدرس حتى تعرفين القالب لاحقًا', 'err'); return; }
-    var name = prompt('اسم القالب (يُستخدم عند الاستخدام لاحقًا):', d.lesson + ' — قالب');
-    if (name === null) return;
-    var t = templates();
-    t.unshift({ id: Store.uid(), name: (name || d.lesson).trim(), data: d, at: new Date().toISOString() });
-    var r = Store.set('prepTemplates', t.slice(0, 30));
-    notify(r.ok ? 'حُفظ القالب ✓' : r.error, r.ok ? 'ok' : 'err');
-    drawTemplates();
+    UI.prompt('اسم القالب (يُستخدم عند الاستخدام لاحقًا):', d.lesson + ' — قالب', 'حفظ كقالب')
+      .then(function (name) {
+        if (name === null) return;
+        var t = templates();
+        t.unshift({ id: Store.uid(), name: (name || d.lesson).trim(), data: d, at: new Date().toISOString() });
+        var r = Store.set('prepTemplates', t.slice(0, 30));
+        notify(r.ok ? 'حُفظ القالب ✓' : r.error, r.ok ? 'ok' : 'err');
+        drawTemplates();
+      });
   }
 
   function drawTemplates() {
@@ -212,9 +215,11 @@
     });
     $$('[data-tdel]').forEach(function (b) {
       b.onclick = function () {
-        if (!confirm('حذف هذا القالب؟')) return;
-        Store.set('prepTemplates', templates().filter(function (y) { return y.id !== b.getAttribute('data-tdel'); }));
-        drawTemplates(); notify('حُذف القالب');
+        UI.confirm('حذف هذا القالب؟').then(function (ok) {
+          if (!ok) return;
+          Store.set('prepTemplates', templates().filter(function (y) { return y.id !== b.getAttribute('data-tdel'); }));
+          drawTemplates(); notify('حُذف القالب');
+        });
       };
     });
   }
@@ -279,10 +284,12 @@
       b.onclick = function () {
         var id = b.getAttribute('data-del');
         var p = preps().filter(function (x) { return x.id === id; })[0];
-        if (!confirm('حذف تحضير «' + (p ? p.lesson : '') + '» نهائيًا؟')) return;
-        var r = setPreps(preps().filter(function (x) { return x.id !== id; }));
-        if (editingId === id) { editingId = null; updateToolbar(); }
-        drawList(); notify(r.ok ? 'حُذف التحضير ✓' : r.error, r.ok ? 'ok' : 'err');
+        UI.confirm('حذف تحضير «' + (p ? p.lesson : '') + '» نهائيًا؟').then(function (ok) {
+          if (!ok) return;
+          var r = setPreps(preps().filter(function (x) { return x.id !== id; }));
+          if (editingId === id) { editingId = null; updateToolbar(); }
+          drawList(); notify(r.ok ? 'حُذف التحضير ✓' : r.error, r.ok ? 'ok' : 'err');
+        });
       };
     });
   }
@@ -522,10 +529,13 @@
     /* --- الأزرار --- */
     $('#pSave').onclick = save;
     $('#pNew').onclick = function () {
+      function fresh() { resetForm(); notify('نموذج جديد جاهز ✓'); }
       if (editingId || $('#p_lesson').value.trim()) {
-        if (!confirm('فتح تحضير جديد؟ التغييرات غير المحفوظة في النموذج الحالي ستُفقد.')) return;
+        UI.confirm('فتح تحضير جديد؟ التغييرات غير المحفوظة في النموذج الحالي ستُفقد.')
+          .then(function (ok) { if (ok) fresh(); });
+        return;
       }
-      resetForm(); notify('نموذج جديد جاهز ✓');
+      fresh();
     };
     $('#pPrint').onclick = function () {
       var d = collect();

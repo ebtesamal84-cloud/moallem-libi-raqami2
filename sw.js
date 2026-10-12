@@ -3,17 +3,27 @@
    يعمل فقط عند التشغيل عبر HTTPS (أثناء النشر على GitHub Pages).
    لا يعمل بالنقر المزدوج على الملف — وهذا طبيعي ومذكور في الدليل.
    ========================================================= */
-var CACHE = 'moallem-libi-v1';
+var CACHE = 'moallem-libi-v2';
 var ASSETS = [
   './',
   './index.html',
   './css/style.css',
   './js/store.js',
+  './js/files.js',
   './js/ai.js',
   './js/app.js',
+  './js/ui.js',
   './js/prep.js',
+  './js/pdftext.js',
+  './js/curriculum.js',
+  './js/activities.js',
+  './js/exams.js',
+  './js/schedule.js',
+  './js/library.js',
   './manifest.webmanifest',
   './icons/icon.svg'
+  /* محرك قراءة PDF (vendor/pdf*.js) يُخزَّن مؤقتًا عند أول استخدام
+     بدل تنزيله مع التثبيت، حتى لا يصبح التثبيت ثقيلًا. */
 ];
 
 self.addEventListener('install', function (e) {
