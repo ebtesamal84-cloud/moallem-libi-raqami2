@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المعلم الليبي الرقمي</title>
+<meta name="description" content="المنصة الذكية المتكاملة للمعلم الليبي المحترف — تخطيط وإنتاج وتقويم وتطوير مهني">
+<meta name="theme-color" content="#0B2545">
+<meta name="color-scheme" content="light dark">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">تخطَّ إلى المحتوى الرئيسي</a>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <button class="icon-btn nav-toggle" id="navToggle" aria-label="فتح قائمة الأقسام" aria-expanded="false">☰</button>
+
+    <a class="brand" href="#/home">
+      <span class="mark" aria-hidden="true">م</span>
+      <span class="brand-txt">
+        <b>المعلم الليبي الرقمي</b>
+        <small>نبدع رقميًا لنرتقي بتعليمنا</small>
+      </span>
+    </a>
+
+    <div class="searchwrap">
+      <span class="s-ic" aria-hidden="true">🔎</span>
+      <input type="search" id="globalSearch" placeholder="ابحث في أقسام المنصة وأدواتها…"
+             aria-label="بحث عام في المنصة" autocomplete="off">
+      <div class="sresults" id="searchResults" hidden role="listbox" aria-label="نتائج البحث"></div>
+    </div>
+
+    <div class="hdr-actions">
+      <button class="icon-btn" id="btnTheme" title="الوضع الفاتح / الداكن" aria-label="تبديل المظهر">🌙</button>
+      <button class="icon-btn" id="btnFont" title="تكبير/تصغير الخط" aria-label="حجم الخط">A+</button>
+      <a class="icon-btn" href="#/settings" title="الإعدادات" aria-label="الإعدادات">⚙️</a>
+    </div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="layout">
+  <nav class="side" id="sideNav" aria-label="أقسام المنصة"></nav>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<footer class="ftr">
+  <div><b>المعلم الليبي الرقمي</b> — منصة تساعد المعلم في التخطيط والإنتاج الرقمي</div>
+  <div class="f-links">
+    <a href="#/privacy">الخصوصية والأمان وإتاحة الوصول</a>
+    <a href="#/settings">الإعدادات</a>
+    <a href="#/home">لوحة التحكم</a>
+  </div>
+  <div style="margin-top:8px;opacity:.8">البيانات تُحفظ في متصفحكِ على هذا الجهاز — لا تُرفع إلى أي خادم.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-wrap" id="modalWrap" role="dialog" aria-modal="true"><div class="modal" id="modalBox"></div></div>
+<div id="print-area" aria-hidden="true"></div>
+
+<noscript>
+  <div style="padding:24px;text-align:center;font-family:Tahoma,sans-serif">
+    هذه المنصة تحتاج إلى تفعيل JavaScript في المتصفح لكي تعمل.
+  </div>
+</noscript>
+
+<script src="js/store.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/app.js"></script>
+<script src="js/prep.js"></script>
+</body>
+</html>
