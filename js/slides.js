@@ -287,14 +287,14 @@
     s.last = d.id;
     save(s);
     Store.set('slidesSel', 0);
-    renderEditor($('#view'), d);
+    renderEditor($('#main'), d);
   }
   function openDeck(id) {
     var s = state();
     s.last = id;
     save(s);
     Store.set('slidesSel', 0);
-    renderEditor($('#view'), findDeck(id));
+    renderEditor($('#main'), findDeck(id));
   }
   function exportDeck(d) {
     if (!d) return;
