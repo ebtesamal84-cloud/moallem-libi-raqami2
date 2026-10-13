@@ -1043,6 +1043,7 @@
 
   /* ---------------- الإقلاع ---------------- */
   function init() {
+    if (window.LOCKED) return; /* قفل المنصة: لا يعمل التطبيق قبل إدخال الرمز */
     applyTheme();
     applyFont();
     navRender();
