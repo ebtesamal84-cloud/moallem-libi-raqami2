@@ -78,7 +78,7 @@ while ($listener.IsListening) {
       continue
     }
     $model = "$($j.model)"
-    if ($model -notmatch '^[A-Za-z0-9.\-]{1,60}$') { $model = 'gemini-2.5-flash' }
+    if ($model -notmatch '^[A-Za-z0-9.\-]{1,60}$') { $model = 'gemini-3.5-flash-lite' }
 
     # المفتاح من KEY.txt
     $key = ''

@@ -25,7 +25,7 @@ var ALLOWED_ORIGINS = {
 };
 
 /* النموذج الافتراضي إن لم تحدّده المنصة */
-var DEFAULT_MODEL = 'gemini-2.5-flash';
+var DEFAULT_MODEL = 'gemini-3.5-flash-lite';
 
 /* حماية بسيطة ضد الإغراق: حد أقصى 20 طلبًا في الدقيقة لكل عنوان */
 var HITS = {};
