@@ -310,7 +310,7 @@
   var GRADES_ALL = [
     'الصف الأول الابتدائي', 'الصف الثاني الابتدائي', 'الصف الثالث الابتدائي',
     'الصف الرابع الابتدائي', 'الصف الخامس الابتدائي', 'الصف السادس الابتدائي',
-    'الأول الإعدادي (السابع)', 'الثاني الإعدادي (الثامن)', 'الثالث الإعدادي (التاسع)',
+    'الأول الإعدادي (الصف السابع)', 'الثاني الإعدادي (الصف الثامن)', 'الثالث الإعدادي (الصف التاسع)',
     'الصف الأول الثانوي', 'الصف الثاني الثانوي', 'الصف الثالث الثانوي'
   ];
 
@@ -353,19 +353,14 @@
   ];
 
   function genConcept() {
-    var sel = $('#g_concept');
-    if (!sel) return '';
-    if (sel.value === '__free') {
-      var f = $('#g_free');
-      return f ? f.value.trim() : '';
-    }
-    return sel.value;
+    var el = $('#g_concept');
+    return el ? el.value.trim() : '';
   }
 
   /* التوليد المحلي: يملأ حقول التحضير من القوالب مع تقسيم زمني */
   function generatePlan() {
     var concept = genConcept();
-    if (!concept) { notify('اختاري المفهوم الرياضي أو اكتبيه (مفهوم حر) أولًا', 'err'); return; }
+    if (!concept) { notify('اكتبي اسم الموضوع أو اختاري من البنك أولًا', 'err'); return; }
     var grade = $('#g_grade').value, unit = $('#g_unit').value,
         dur = parseInt($('#g_dur').value, 10) || 45;
     var c = CONCEPTS.filter(function (x) { return x.t === concept; })[0] || null;
@@ -433,7 +428,7 @@
       return;
     }
     var concept = genConcept();
-    if (!concept) { notify('اختاري المفهوم الرياضي أو اكتبيه (مفهوم حر) أولًا', 'err'); return; }
+    if (!concept) { notify('اكتبي اسم الموضوع أو اختاري من البنك أولًا', 'err'); return; }
     var grade = $('#g_grade').value, dur = parseInt($('#g_dur').value, 10) || 45;
     notify('جارٍ التوليد بخدمة الذكاء الاصطناعي…');
     AI.run({
@@ -743,31 +738,27 @@
           '<div data-pane="gen" style="display:none">' +
             '<div class="notice"><b>كيف يعمل المولّد:</b> تختارين الصف والوحدة والمفهوم وزمن الحصة، ثم يُبنى التحضير من ' +
               'قوالب تربوية جاهزة (أهداف · تمهيد · استراتيجيات · جدول زمني · تقويم) — <b>يعمل بلا إنترنت</b> ولا يُرسل شيئًا. ' +
-              'بنك المفاهيم مصنّف بصفوف الإعدادي الثلاث، مع <b>مفهوم حر</b> لأي صف أو مرحلة أخرى. ' +
+              'واسم الموضوع <b>يُكتب مباشرة</b> لأي صف أو مرحلة، والبنك المصنّف بصفوف الإعدادي الثلاث يظهر لكِ كاقتراحات. ' +
               'صدقًا: المسالك هنا مساعدة للتحضير وليست نصوصًا من الكتاب الرسمي — راجعيها وطابقيها مع منهج مدرستكِ. ' +
               'كل ما يُولَّد قابل للتعديل والحذف قبل الحفظ، وعنوان الدرس الذي تكتبيه لا يُستبدل بالتوليد.</div>' +
             '<div class="row">' +
               '<div class="field"><label for="g_grade">الصف</label>' +
-                '<input id="g_grade" list="g_grades" placeholder="مثال: الثاني الإعدادي (الثامن)">' +
+                '<input id="g_grade" list="g_grades" placeholder="مثال: الثالث الإعدادي (الصف التاسع)">' +
                 '<datalist id="g_grades">' +
                   GRADES_ALL.map(function (x) { return '<option value="' + esc(x) + '"></option>'; }).join('') +
                 '</datalist></div>' +
               field('g_unit', 'الوحدة', { ph: 'مثال: الوحدة الثالثة' }) +
-              '<div class="field"><label for="g_concept">المفهوم الرياضي (مصنّف بصفوف الإعدادي)</label>' +
-                '<select id="g_concept">' +
+              '<div class="field"><label for="g_concept">اسم الموضوع / المفهوم (اكتبيه أو اختاري)</label>' +
+                '<input id="g_concept" list="conceptBank" placeholder="مثال: الكسور الاعتيادية — أو اكتبي عنوان درسكِ">' +
+                '<datalist id="conceptBank">' +
                   ['الأول الإعدادي', 'الثاني الإعدادي', 'الثالث الإعدادي'].map(function (g) {
                     return '<optgroup label="' + g + '">' +
                       CONCEPTS.filter(function (c) { return c.g === g; })
-                        .map(function (c) { return '<option value="' + esc(c.t) + '">' + esc(c.t) + '</option>'; }).join('') +
+                        .map(function (c) { return '<option value="' + esc(c.t) + '"></option>'; }).join('') +
                       '</optgroup>';
                   }).join('') +
-                  '<optgroup label="بلا تصنيف / مرحلة أخرى"><option value="__free">… مفهوم حر (اكتبيه بنفسك)</option></optgroup>' +
-                '</select></div>' +
+                '</datalist></div>' +
               field('g_dur', 'زمن الحصة (دقيقة)', { type: 'number', v: '45', min: '1' }) +
-            '</div>' +
-            '<div class="field" id="fcWrap" hidden>' +
-              '<label for="g_free">مفهوم حر — اكتبيه بنفسك (لأي صف أو مرحلة)</label>' +
-              '<input id="g_free" placeholder="مثال: الضرب في الكسور — للصف الرابع الابتدائي">' +
             '</div>' +
             '<div class="btn-row" style="margin-top:6px">' +
               '<button class="btn btn-primary" id="gGo">✨ ولّدي التحضير</button>' +
@@ -885,12 +876,6 @@
     $('#gGeo').onclick = geoLink;
     $('#gPull').onclick = pullQuestions;
     $('#gWord').onclick = exportWord;
-    /* إظهار/إخفاء حقل المفهوم الحر */
-    $('#g_concept').onchange = function () {
-      var w = $('#fcWrap');
-      if (w) w.hidden = (this.value !== '__free');
-      if (this.value === '__free') { var f = $('#g_free'); if (f) f.focus(); }
-    };
 
     function drawBanks() {
       $('#objBank').innerHTML = OBJ_BANK.map(function (o, i) {
