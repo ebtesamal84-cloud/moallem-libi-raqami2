@@ -3,7 +3,7 @@
    يعمل فقط عند التشغيل عبر HTTPS (أثناء النشر على GitHub Pages).
    لا يعمل بالنقر المزدوج على الملف — وهذا طبيعي ومذكور في الدليل.
    ========================================================= */
-var CACHE = 'moallem-libi-v13';
+var CACHE = 'moallem-libi-v14';
 var ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ var ASSETS = [
   './js/prep.js',
   './js/pdftext.js',
   './js/curriculum.js',
+  './js/mathcurric.js',
   './js/activities.js',
   './js/exams.js',
   './js/schedule.js',

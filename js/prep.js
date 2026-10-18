@@ -956,6 +956,20 @@
     $('#listType').addEventListener('change', drawList);
 
     resetForm();
+
+    /* تهيئة حقول من دليل معلم رياضيات التاسع (زر «تحضير من هذا الدرس») */
+    if (window.__prepSeed) {
+      var m9s = window.__prepSeed; window.__prepSeed = null;
+      if ($('#g_grade')) $('#g_grade').value = m9s.grade || '';
+      if ($('#g_unit')) $('#g_unit').value = m9s.unit || '';
+      if ($('#g_concept')) $('#g_concept').value = m9s.lesson || '';
+      if ($('#p_subject')) $('#p_subject').value = m9s.subject || '';
+      if ($('#p_grade')) $('#p_grade').value = m9s.grade || '';
+      if ($('#p_unit')) $('#p_unit').value = m9s.unit || '';
+      if ($('#p_lesson')) $('#p_lesson').value = m9s.lesson || '';
+      notify('حُدِّثت الحقول من دليل المعلم ✓ — اضغطي «✨ ولّدي التحضير» عند الجاهزية');
+    }
+
     drawList();
     drawTemplates();
     updateToolbar();

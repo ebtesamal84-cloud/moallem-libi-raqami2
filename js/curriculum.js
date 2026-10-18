@@ -272,6 +272,9 @@
 
     page = UI.crud(cfg);
     page.render(main, mod);
+
+    /* دليل معلم رياضيات التاسع — بطاقة دخول ثابتة في هذا القسم */
+    if (global.Math9) global.Math9.inject(main);
   });
 
 })(window);
