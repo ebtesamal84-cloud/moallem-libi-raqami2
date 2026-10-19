@@ -785,6 +785,7 @@
               '<button class="btn btn-primary" id="gGo">✨ ولّدي التحضير</button>' +
               '<button class="btn btn-soft" id="gAI">🤖 توليد بمساعدة الذكاء الاصطناعي</button>' +
               '<button class="btn btn-navy" id="gGeo">🔗 بحث GeoGebra عن المفهوم</button>' +
+              '<button class="btn btn-primary" id="gMath9">📐 دليل معلم التاسع (بالفهرس)</button>' +
               '<button class="btn btn-soft" id="gPull">📥 سحب 5 أسئلة من البنك إلى التقويم</button>' +
               '<button class="btn btn-soft" id="gWord">📄 تصدير Word</button>' +
             '</div>' +
@@ -896,6 +897,10 @@
     $('#gAI').onclick = generatePlanAI;
     $('#gGeo').onclick = geoLink;
     $('#gPull').onclick = pullQuestions;
+    $('#gMath9').onclick = function () {
+      if (window.Math9 && Math9.open) Math9.open();
+      else notify('الدليل غير متاح الآن — أعيدي تحميل الصفحة ثم أعيدي المحاولة');
+    };
     $('#gWord').onclick = exportWord;
 
     function drawBanks() {
