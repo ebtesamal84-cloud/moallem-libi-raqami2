@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كرّاسة التحضير | رياضيات الصف التاسع — إبتسام مصباح الشمام</title>
+<meta name="description" content="كرّاسة تحضير المعلمة إبتسام مصباح الشمام — الرياضيات، الصف التاسع، مدرسة أبي عبيدة بن الجراح، زليتن — ليبيا.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👩‍🏫</text></svg>">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#6d4bff">
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- الترويسة -->
+<header class="site">
+  <div class="wrap bar">
+    <div class="brand">إبتسام مصباح الشمام<small>رياضيات · الصف التاسع</small></div>
+    <button id="navToggle" class="icon-btn" aria-label="القائمة">☰</button>
+    <nav class="main" id="mainNav">
+      <a href="#home">الرئيسية</a>
+      <a href="#prep">خطوات التحضير</a>
+      <a href="#stages">مراحل الدرس</a>
+      <a href="#warmup">التمهيد</a>
+      <a href="#session">الحصة</a>
+      <a href="#plan">الخطة</a>
+      <a href="#lessons">الدروس</a>
+      <a href="#curriculum">المنهج</a>
+      <a href="#evaluate">التقويم</a>
+    </nav>
+    <button id="themeToggle" class="icon-btn" aria-label="الوضع الليلي">🌙</button>
+  </div>
+</header>
+
+<!-- البطل -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">✨ بالعلم نبني الأجيال ✨</span>
+      <h1>كرّاسة تحضير المعلمة<br><span class="grad">رياضيات الصف التاسع</span></h1>
+      <p class="lead">
+        منهجية متكاملة للتحضير الجيد: خطوات، ومراحل، وأفكار تمهيدية، وخطة أسبوعية تفاعلية،
+        ودروس مرتّبة على فهرس كتاب الرياضيات الرسمي — لتعليم الرياضيات بأفضل صورة.
+      </p>
+      <div class="cta">
+        <a href="#lessons" class="btn primary">ابدئي بالدروس ←</a>
+        <a href="#plan" class="btn ghost">الخطة الأسبوعية</a>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="avatar">إ</div>
+      <div class="tname">إبتسام مصباح الشمام</div>
+      <div class="trole">معلمة الرياضيات</div>
+      <dl>
+        <dt>المادة</dt><dd>الرياضيات</dd>
+        <dt>الصف</dt><dd>الثالث الإعدادي (التاسع)</dd>
+        <dt>المدرسة</dt><dd>أبي عبيدة بن الجراح للتعليم الأساسي</dd>
+        <dt>المدينة</dt><dd>زليتن — ليبيا</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b id="stUnits">0</b><span>وحدة دراسية</span></div>
+      <div class="stat"><b id="stLessons">0</b><span>درسًا</span></div>
+      <div class="stat"><b>45</b><span>دقيقة للحصة</span></div>
+      <div class="stat"><b id="stWeeks">0</b><span>أسبوعًا دراسيًا</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- خطوات التحضير -->
+<section class="block" id="prep">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>خطوات التحضير الجيد</h2>
+      <p>خمس خطوات تُديرها قبل دخولكِ الصف، فتصلكِ الحصة مرتبة وواثقة.</p>
+    </div>
+    <div class="cards" id="prepCards"></div>
+  </div>
+</section>
+
+<!-- مراحل الدرس -->
+<section class="block" id="stages">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>مراحل الدرس</h2>
+      <p>تدرّج من التهيئة إلى التقويم — كل مرحلة بزمنها وتقنيتها.</p>
+    </div>
+    <div class="tabs" id="stageTabs"></div>
+    <div id="stagePanels"></div>
+  </div>
+</section>
+
+<!-- أفكار التمهيد -->
+<section class="block" id="warmup">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>أفكار التمهيد</h2>
+      <p>افتحي الحصة بسؤال أو موقف يشدّ انتباه الصف — اضغطي لتظهر فكرة عشوائية.</p>
+    </div>
+    <div class="warm reveal">
+      <div class="idea-t" id="ideaTitle">جاهزة للفكرة</div>
+      <div class="idea-d" id="ideaDesc">اضغطي الزر لتظهر فكرة تمهيدية من بنك الأفكار.</div>
+      <button id="randomIdea" class="btn primary">🎲 فكرة عشوائية</button>
+    </div>
+  </div>
+</section>
+
+<!-- الحصة النموذجية -->
+<section class="block" id="session">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>الحصة النموذجية</h2>
+      <p>مؤقّت الحصة (45 دقيقة) بتقسيم المراحل — يساعدكِ على ضبط الزمن داخل الصف.</p>
+    </div>
+    <div class="timer-wrap reveal">
+      <div class="ring">
+        <svg viewBox="0 0 240 240">
+          <circle class="bgc" cx="120" cy="120" r="104"></circle>
+          <circle class="fg" id="ringFg" cx="120" cy="120" r="104"></circle>
+        </svg>
+        <div class="time">
+          <b id="timeText">45:00</b>
+          <span id="phaseText">الحصة كاملة</span>
+        </div>
+      </div>
+      <div>
+        <div class="phase-btns" id="phaseBtns"></div>
+        <div class="cta" style="justify-content:center">
+          <button id="timerStart" class="btn primary">▶ ابدأ</button>
+          <button id="timerReset" class="btn ghost">↺ إعادة</button>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h3>تقسيم زمن الحصة المقترح</h3>
+          <ul class="tick" id="phaseList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الخطة الأسبوعية -->
+<section class="block" id="plan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>الخطة الأسبوعية</h2>
+      <p>خطة الفصل الدراسي الأول مرتّبة على وحدات المنهج — ضعي علامة على ما أنجزتِه.</p>
+    </div>
+    <div class="weeks reveal" id="weeksGrid"></div>
+  </div>
+</section>
+
+<!-- الدروس -->
+<section class="block" id="lessons">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>دروس رياضيات التاسع</h2>
+      <p>مرتّبة بترقيم الكتاب نفسه (درس-وحدة). ما ورد في الصور غير الحادّ موسوم بـ<span class="warn">⚠️</span> بانتظار تأكيدكِ.</p>
+    </div>
+    <div class="filter-row" id="unitFilter"></div>
+    <div id="lessonsList"></div>
+  </div>
+</section>
+
+<!-- المنهج -->
+<section class="block" id="curriculum">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>المنهج الليبي — الصف التاسع</h2>
+      <p>وحدات كتاب الرياضيات الرسمي كما وردت في فهرسه.</p>
+    </div>
+    <div class="grid-units reveal" id="unitsGrid"></div>
+  </div>
+</section>
+
+<!-- التقويم -->
+<section class="block" id="evaluate">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>معايير تقويم الحصة</h2>
+      <p>حاكمي أدائكِ في كل حصة بهذه المعايير — ضعي علامة على ما تحقّق.</p>
+    </div>
+    <div class="eval-grid reveal">
+      <div class="eval-ring">
+        <div class="big"><span id="evalDone">0</span>/<span id="evalTotal">0</span></div>
+        <div style="color:var(--muted);font-weight:700">معيارًا محقَّقًا</div>
+        <button id="evalPrint" class="btn ghost" style="margin-top:16px">🖨 طباعة التقويم</button>
+      </div>
+      <div class="criteria" id="critList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- الخاتمة -->
+<section class="block" id="closing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>خاتمة الكرّاسة</h2>
+    </div>
+    <div class="notes reveal">
+      <div class="note">
+        <h4>ملاحظات المعلمة</h4>
+        <p style="color:var(--muted)">مساحة حرة لتدوين ملاحظاتكِ على الحصص والطلاب: ما نجح، وما يحتاج تعديلًا، وفكرة لأسبوع قادم.</p>
+        <div class="sig">إبتسام مصباح الشمام — معلمة الرياضيات</div>
+      </div>
+      <div class="note">
+        <h4>الاعتماد</h4>
+        <p style="color:var(--muted)">تُختم هذه الكرّاسة من إدارة المدرسة بعد المراجعة.</p>
+        <div class="sig">إدارة المدرسة — ختم وتوقيع</div>
+      </div>
+    </div>
+    <div class="cta" style="justify-content:center;margin-top:26px">
+      <button id="printAll" class="btn primary">🖨 طباعة الكرّاسة كاملة</button>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="brand">إبتسام مصباح الشمام · رياضيات التاسع</div>
+    <p>مدرسة أبي عبيدة بن الجراح للتعليم الأساسي — زليتن، ليبيا</p>
+    <p style="margin-top:8px;font-size:.85rem">كرّاسة تحضير شخصية — تعمل بدون إنترنت.</p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="العودة لأعلى">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>

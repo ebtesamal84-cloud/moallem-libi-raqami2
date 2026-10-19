@@ -1,0 +1,21 @@
+{
+  "name": "كرّاسة تحضير رياضيات التاسع — إبتسام مصباح الشمام",
+  "short_name": "كرّاسة التاسع",
+  "description": "كرّاسة تحضير المعلمة إبتسام مصباح الشمام — الرياضيات، الصف التاسع، مدرسة أبي عبيدة بن الجراح، زليتن.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f7fb",
+  "theme_color": "#6d4bff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236d4bff'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white'>👩‍🏫</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
