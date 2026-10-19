@@ -5,36 +5,37 @@
    ========================================================================== */
 
 :root {
-  --primary: #7c3aed;        /* بنفسجي عميق */
-  --primary-2: #a855f7;      /* بنفسجي فاتح */
-  --pink: #db2777;           /* وردي */
-  --accent: #06b6d4;         /* فيروزي سماوي */
-  --gold: #f59e0b;           /* ذهبي */
-  --bg: #f7f4ff;
-  --bg-2: #efe9ff;
+  --primary: #6d3ae0;        /* بنفسجي ملكي — أهدأ وأنضرّ */
+  --primary-2: #9a63f2;      /* لافندر */
+  --pink: #d8408c;           /* وردي مخملي */
+  --accent: #0e93a8;         /* فيروزي عميق هادئ — أوضح للقراءة */
+  --gold: #d69a25;           /* ذهبي عنبري */
+  --bg: #fbfaff;             /* خلفية شبه بيضاء — متنفّس أوسع */
+  --bg-2: #f4f1fd;
   --surface: #ffffff;
-  --text: #211a45;
-  --muted: #6a6390;
-  --line: #e9e3fb;
-  --shadow: 0 10px 30px rgba(124, 58, 237, .10);
-  --shadow-lg: 0 22px 55px rgba(124, 58, 237, .28);
-  --shadow-pink: 0 18px 45px rgba(219, 39, 119, .28);
+  --text: #1b1936;
+  --muted: #6e6a94;
+  --line: #ece7fa;
+  --shadow: 0 8px 26px rgba(86, 56, 176, .08);
+  --shadow-lg: 0 20px 46px rgba(86, 56, 176, .18);
+  --shadow-pink: 0 16px 40px rgba(216, 64, 140, .24);
   --radius: 20px;
-  --grad: linear-gradient(135deg, #7c3aed 0%, #a855f7 48%, #db2777 100%);
-  --grad-soft: linear-gradient(135deg, rgba(124,58,237,.14), rgba(219,39,119,.14));
+  --grad: linear-gradient(120deg, #5b2fd6 0%, #8f3fe6 48%, #d6388f 100%);
+  --grad-line: linear-gradient(90deg, #6d3ae0 0%, #d8408c 58%, #f0b13a 100%);
+  --grad-soft: linear-gradient(135deg, rgba(109, 58, 224, .13), rgba(216, 64, 140, .11));
 }
 
 html[data-theme="dark"] {
-  --bg: #100d20;
-  --bg-2: #191436;
-  --surface: #1e1840;
-  --text: #f0ecff;
-  --muted: #a79fd0;
-  --line: #2e2657;
-  --shadow: 0 12px 34px rgba(0, 0, 0, .45);
-  --shadow-lg: 0 22px 55px rgba(168, 85, 247, .35);
-  --shadow-pink: 0 18px 45px rgba(219, 39, 119, .30);
-  --grad-soft: linear-gradient(135deg, rgba(168,85,247,.20), rgba(219,39,119,.18));
+  --bg: #0e0c1d;
+  --bg-2: #161232;
+  --surface: #1c1740;
+  --text: #f1edff;
+  --muted: #a49cd4;
+  --line: #2c2556;
+  --shadow: 0 12px 34px rgba(0, 0, 0, .48);
+  --shadow-lg: 0 20px 48px rgba(147, 51, 234, .32);
+  --shadow-pink: 0 16px 40px rgba(216, 64, 140, .30);
+  --grad-soft: linear-gradient(135deg, rgba(147, 51, 234, .24), rgba(216, 64, 140, .18));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -60,7 +61,7 @@ a:hover { text-decoration: underline; }
 /* ---------- شريط تقدّم القراءة ---------- */
 #progress {
   position: fixed; top: 0; inset-inline-start: 0; height: 4px; width: 0;
-  background: var(--grad); z-index: 1000; transition: width .1s linear;
+  background: var(--grad-line); z-index: 1000; transition: width .1s linear;
 }
 
 /* ---------- الترويسة ---------- */
@@ -101,9 +102,10 @@ nav.main a:hover, nav.main a.on { background: var(--bg-2); color: var(--primary)
 .hero {
   padding: 72px 0 48px; position: relative; overflow: hidden;
   background:
-    radial-gradient(900px 420px at 88% -12%, rgba(124, 58, 237, .22), transparent),
-    radial-gradient(760px 400px at 4% -4%, rgba(219, 39, 119, .18), transparent),
-    radial-gradient(600px 360px at 50% 110%, rgba(6, 182, 212, .16), transparent);
+    radial-gradient(700px 360px at 84% -6%, rgba(147, 51, 234, .20), transparent 62%),
+    radial-gradient(560px 320px at 6% 4%, rgba(216, 64, 140, .15), transparent 62%),
+    radial-gradient(520px 300px at 46% 118%, rgba(14, 147, 168, .17), transparent 62%),
+    radial-gradient(380px 240px at 97% 94%, rgba(240, 177, 58, .16), transparent 60%);
 }
 /* أشكال زخرفية عائمة */
 .hero::before, .hero::after {
@@ -112,12 +114,12 @@ nav.main a:hover, nav.main a.on { background: var(--bg-2); color: var(--primary)
 }
 .hero::before {
   width: 260px; height: 260px; top: -70px; inset-inline-start: 8%;
-  background: radial-gradient(circle at 30% 30%, rgba(168,85,247,.55), rgba(168,85,247,0) 70%);
+  background: radial-gradient(circle at 30% 30%, rgba(154, 99, 242, .42), rgba(154, 99, 242, 0) 70%);
   animation: float 9s ease-in-out infinite;
 }
 .hero::after {
   width: 200px; height: 200px; bottom: -50px; inset-inline-end: 12%;
-  background: radial-gradient(circle at 40% 40%, rgba(6,182,212,.5), rgba(6,182,212,0) 70%);
+  background: radial-gradient(circle at 40% 40%, rgba(14, 147, 168, .40), rgba(14, 147, 168, 0) 70%);
   animation: float 11s ease-in-out infinite reverse;
 }
 @keyframes float {
@@ -161,7 +163,8 @@ nav.main a:hover, nav.main a.on { background: var(--bg-2); color: var(--primary)
   cursor: pointer; border: none; transition: .2s; text-decoration: none;
 }
 .btn.primary {
-  background: var(--grad); color: #fff; box-shadow: var(--shadow-lg);
+  background: var(--grad); color: #fff;
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, .28);
   background-size: 200% 200%; transition: .3s;
 }
 .btn.primary:hover {
@@ -188,9 +191,9 @@ nav.main a:hover, nav.main a.on { background: var(--bg-2); color: var(--primary)
   background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .stat span { color: var(--muted); font-weight: 600; font-size: .9rem; }
-.stat:nth-child(2)::before { background: linear-gradient(135deg, var(--accent), #22d3ee); }
-.stat:nth-child(3)::before { background: linear-gradient(135deg, var(--gold), #fbbf24); }
-.stat:nth-child(4)::before { background: linear-gradient(135deg, var(--pink), #f472b6); }
+.stat:nth-child(2)::before { background: linear-gradient(135deg, var(--accent), #35c6dc); }
+.stat:nth-child(3)::before { background: linear-gradient(135deg, var(--gold), #f2bc46); }
+.stat:nth-child(4)::before { background: linear-gradient(135deg, var(--pink), #ef6ba8); }
 
 /* ---------- الأقسام ---------- */
 section.block { padding: 54px 0; }
