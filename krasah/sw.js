@@ -3,11 +3,12 @@
    استراتيجية: تحديث النسخة أولًا ثم الكاش (Network-first للصفحة،
    Cache-first للثوابت) — مع مسح الكاش القديم عند تغيير رقم النسخة.
    ========================================================================== */
-var CACHE = 'krasah-v15';
+var CACHE = 'krasah-v16';
 
 var ASSETS = [
   './',
   './index.html',
+  './fonts.css',
   './styles.css',
   './app.js',
   './manifest.webmanifest'

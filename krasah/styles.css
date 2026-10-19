@@ -332,6 +332,24 @@ ul.tick li::before { content: "✓"; position: absolute; inset-inline-start: 0; 
 }
 .unit-cell h4 { font-size: 1rem; font-weight: 800; }
 .unit-cell span { color: var(--muted); font-size: .85rem; }
+.unit-cell .un { position: relative; font-size: 1.75rem; line-height: 1; }
+.unit-cell .un i {
+  position: absolute; top: -5px; inset-inline-start: -5px;
+  width: 21px; height: 21px; border-radius: 50%;
+  background: var(--grad); color: #fff; font-style: normal;
+  font-family: "Cairo", sans-serif; font-weight: 800; font-size: .72rem;
+  display: grid; place-items: center; box-shadow: 0 2px 8px rgba(86, 56, 176, .38);
+}
+.unit-title .ui-t { font-style: normal; margin-inline-end: 8px; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .28)); }
+
+/* تنبيه عائم (نسخة احتياطية / استيراد) */
+.toast {
+  position: fixed; bottom: 26px; left: 50%; transform: translate(-50%, 22px);
+  background: var(--text); color: var(--bg); padding: 12px 24px; border-radius: 999px;
+  font-weight: 700; font-size: .92rem; box-shadow: var(--shadow-lg); opacity: 0;
+  transition: opacity .35s, transform .35s; z-index: 1200; pointer-events: none; max-width: 92vw;
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
 
 /* معايير التقويم */
 .eval-grid { display: grid; grid-template-columns: 240px 1fr; gap: 30px; align-items: start; }
@@ -384,9 +402,41 @@ footer.site .brand { margin-bottom: 10px; }
 
 /* ---------- الطباعة ---------- */
 @media print {
-  header.site, #toTop, #progress, .cta, .filter-row, .phase-btns, #randomIdea, #navToggle { display: none !important; }
-  body { background: #fff; color: #000; font-size: 12pt; }
-  section.block { page-break-inside: avoid; padding: 18px 0; background: #fff !important; }
-  .panel { display: block !important; }
-  .card, .lesson, .stat, .unit-cell, .week { box-shadow: none; border: 1px solid #999; }
+  @page { margin: 14mm; }
+  header.site, #toTop, #progress, .cta, .filter-row, .phase-btns,
+  #randomIdea, #navToggle, .badge, .timer-wrap .ring, .toast { display: none !important; }
+
+  body { background: #fff !important; color: #111 !important; font-size: 12pt; }
+
+  /* عناصر .reveal قد لا تكون ظهرت بعد عند الطباعة — نضمن ظهورها */
+  .reveal, .reveal * { opacity: 1 !important; transform: none !important; }
+
+  .hero { padding: 0 0 14px; background: none !important; }
+  .hero::before, .hero::after { display: none !important; }
+  .hero h1 { margin: 0 0 6px; }
+  .hero h1 .grad, .brand .grad { background: none !important; color: #111 !important; -webkit-text-fill-color: #111; }
+  .hero p.lead, .stats, .tcard dl { display: none !important; }
+  .tcard { padding: 10px 16px !important; border: 1px solid #bbb !important; box-shadow: none !important; }
+  .tcard .avatar { width: 34px; height: 34px; font-size: 1rem; background: #eee !important; color: #111 !important; }
+
+  section.block { page-break-inside: avoid; padding: 14px 0; background: #fff !important; }
+  .unit-block, .lesson, .crit, .note { page-break-inside: avoid; }
+  h2, h3, h4 { page-break-after: avoid; }
+
+  /* أشرطة التدرّج لا تُطبع جيدًا — نستبدلها بحدود واضحة */
+  .unit-title {
+    background: #fff !important; color: #111 !important; box-shadow: none !important;
+    border: 2px solid #111; padding: 8px 14px !important;
+  }
+  .unit-title .ui-t { filter: none !important; }
+  .unit-ov { background: #f4f4f4 !important; border-color: #bbb !important; }
+  .step { background: #fff !important; border-inline-start: 3px solid #111 !important; }
+  .step b { color: #111 !important; }
+  .lbl { color: #111 !important; }
+
+  .card, .lesson, .stat, .unit-cell, .week, .crit, .note, .warm, .panel {
+    box-shadow: none !important; border: 1px solid #999 !important; background: #fff !important;
+  }
+  .panel { display: block !important; margin-bottom: 14px; }
+  footer.site { background: #fff !important; color: #111 !important; border-top: 1px solid #999; }
 }

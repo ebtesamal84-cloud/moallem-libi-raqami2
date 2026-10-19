@@ -19,6 +19,9 @@
     return esc(t).replace(/⚠️/g, '<span class="warn">⚠️ يحتاج تأكيدك</span>');
   };
 
+  /* أيقونة مميّزة لكل وحدة من وحدات المنهج */
+  var UNIT_ICONS = ['🧮', '➗', '📐', '📈', '📦', '🔺', '🦋', '🧩', '📊'];
+
   /* ---------------- مراحل الافتراضات الثابتة ---------------- */
   var TOTAL_MIN = 45;
 
@@ -816,13 +819,13 @@
     UNITS.forEach(function (u, ui) {
       if (filter != null && filter !== ui) return;
       var ls = u.lessons.map(lessonHTML).join('');
-      html += '<div class="unit-block"><div class="unit-title">' + warnify(u.t) + '</div>' +
+      html += '<div class="unit-block"><div class="unit-title"><span class="ui-t">' + (UNIT_ICONS[ui] || '📘') + '</span>' + warnify(u.t) + '</div>' +
         '<div class="unit-ov">' + warnify(u.ov) + '</div><div class="lessons">' + ls + '</div></div>';
     });
     $('#lessonsList').innerHTML = html;
   }
   $('#unitFilter').innerHTML = '<button class="tab on" data-u="all">كل الوحدات</button>' +
-    UNITS.map(function (u, i) { return '<button class="tab" data-u="' + i + '">وحدة ' + (i + 1) + '</button>'; }).join('');
+    UNITS.map(function (u, i) { return '<button class="tab" data-u="' + i + '">وحدة ' + (i + 1) + ' ' + (UNIT_ICONS[i] || '📘') + '</button>'; }).join('');
   $$('#unitFilter .tab').forEach(function (b) {
     b.addEventListener('click', function () {
       $$('#unitFilter .tab').forEach(function (x) { x.classList.remove('on'); });
@@ -835,7 +838,7 @@
 
   /* --- شبكة الوحدات (المنهج) --- */
   $('#unitsGrid').innerHTML = UNITS.map(function (u, i) {
-    return '<div class="unit-cell" data-u="' + i + '"><div class="un">' + (i + 1) + '</div><h4>' + warnify(u.t.replace(/^الوحدة\s+\S+:\s*/, '')) +
+    return '<div class="unit-cell" data-u="' + i + '"><div class="un"><i>' + (i + 1) + '</i>' + (UNIT_ICONS[i] || '📘') + '</div><h4>' + warnify(u.t.replace(/^الوحدة\s+\S+:\s*/, '')) +
       '</h4><span>' + u.lessons.length + ' دروس</span></div>';
   }).join('');
   $$('#unitsGrid .unit-cell').forEach(function (c) {
@@ -874,6 +877,87 @@
   }
   renderEval();
   $('#evalPrint').addEventListener('click', function () { window.print(); });
+
+  /* ======================================================================
+     3-ب) النسخة الاحتياطية — تصدير واستيراد بيانات المعلمة
+     البيانات المحفوظة: علامات الخطة (krasahWeeks)، معايير التقويم
+     (krasahEval)، والوضع (krasahTheme). كلها في متصفح المعلمة وحده.
+     ====================================================================== */
+  function readBackupData() {
+    var out = {};
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (!k || k.indexOf('krasah') !== 0) continue;
+      var raw = localStorage.getItem(k);
+      try { out[k] = JSON.parse(raw); } catch (err) { out[k] = raw; }
+    }
+    return out;
+  }
+  function writeBackupData(data) {
+    var n = 0;
+    for (var k in data) {
+      if (!Object.prototype.hasOwnProperty.call(data, k) || k.indexOf('krasah') !== 0) continue;
+      var v = data[k];
+      localStorage.setItem(k, (v !== null && typeof v === 'object') ? JSON.stringify(v) : String(v));
+      n++;
+    }
+    return n;
+  }
+  function toast(msg) {
+    var el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    requestAnimationFrame(function () { el.classList.add('on'); });
+    setTimeout(function () {
+      el.classList.remove('on');
+      setTimeout(function () { el.remove(); }, 450);
+    }, 3200);
+  }
+  function exportBackup() {
+    var payload = {
+      app: 'krasah-9',
+      teacher: 'إبتسام مصباح الشمام',
+      note: 'نسخة احتياطية لكرّاسة تحضير رياضيات الصف التاسع',
+      savedAt: new Date().toISOString(),
+      data: readBackupData()
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'كراسة-التحضير-نسخة-احتياطية-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    toast('تم تنزيل النسخة الاحتياطية — احفظيها في مكان آمن 💾');
+  }
+  function importBackup(file) {
+    if (!file) return;
+    var r = new FileReader();
+    r.onload = function () {
+      try {
+        var txt = String(r.result || '').replace(/^\ufeff/, '');
+        var obj = JSON.parse(txt);
+        var data = (obj && obj.data && typeof obj.data === 'object') ? obj.data : obj;
+        if (!data || typeof data !== 'object') throw new Error('bad-format');
+        var n = writeBackupData(data);
+        if (!n) throw new Error('no-data');
+        toast('تم استرجاع ' + n + ' قِطعة بيانات — تُحدَّث الصفحة الآن ✅');
+        setTimeout(function () { location.reload(); }, 1300);
+      } catch (err) {
+        alert('هذا الملف ليس نسخة احتياطية صالحة لهذه الكرّاسة.\nاختاري الملف الذي نزّلتِه من زر «تصدير نسخة احتياطية» (امتداد ‎.json).');
+      }
+    };
+    r.readAsText(file);
+  }
+  $('#exportData').addEventListener('click', exportBackup);
+  $('#importData').addEventListener('click', function () { $('#importFile').click(); });
+  $('#importFile').addEventListener('change', function () {
+    importBackup(this.files && this.files[0]);
+    this.value = '';
+  });
 
   /* ======================================================================
      4) عناصر الواجهة العامة
