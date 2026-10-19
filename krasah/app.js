@@ -994,6 +994,27 @@
 
   $('#printAll').addEventListener('click', function () { window.print(); });
 
+  /* --- تثبيت التطبيق في الجهاز --- */
+  var deferredInstall = null;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredInstall = e;
+    var b = $('#installApp');
+    if (b) b.style.display = '';
+  });
+  $('#installApp').addEventListener('click', function () {
+    if (!deferredInstall) {
+      alert('التثبيت المباشر غير متاح في هذا المتصفح.\nعلى الهاتف: النقاط ⋮ ← «إضافة إلى الشاشة الرئيسية».');
+      return;
+    }
+    deferredInstall.prompt();
+    deferredInstall.userChoice.then(function () { deferredInstall = null; });
+  });
+  window.addEventListener('appinstalled', function () {
+    var b = $('#installApp');
+    if (b) { b.textContent = '✅ الكرّاسة مثبّتة في جهازك'; b.disabled = true; }
+  });
+
   /* --- Service Worker (عمل بدون إنترنت) --- */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
